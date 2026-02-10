@@ -39,12 +39,23 @@ public class PhonebookFrame extends Frame{
 	java.awt.List listBox;
 	Label viewIdlb, viewNamelb, viewHplb, viewEmaillb;
 	
-	//수정부품
+	//찾기부품
 	Label updateNamelb;
 	TextField updateSearchNametf;
 	Button updateSearchbtn;
 	java.awt.List updateSearchListBox;
+	
+	//수정부품
+	Label updateNamelb2;
+	TextField updateNametf;
+	Button updatebtn;
+	java.awt.List updateListBox;
+	java.awt.List updateSearchListBox2;
+	
+	
+	
 	//삭제 부품
+	
 	
 	public PhonebookFrame() {
 		setTitle("전화번호부 프로그램");
@@ -224,7 +235,7 @@ public class PhonebookFrame extends Frame{
 			}
 		});
 		
-		//수정
+		//찾기
 		updateNamelb=new Label("찾을 이름:");
 		updateSearchNametf=new TextField(20);
 		updateSearchbtn=new Button("찾기");
@@ -276,9 +287,78 @@ public class PhonebookFrame extends Frame{
 		updateSearchListBox.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				//상세보기를 재활용
+				setVisible();
+				updateNamelb.setVisible(true);
+				updateSearchNametf.setVisible(true);
+				updateSearchbtn.setVisible(true);
+				updateSearchListBox.setVisible(true);
+				
+				int id=Integer.parseInt(listBox.getSelectedItem().split(" ")[0]);
+				for(Phonebook p:pm.getList()) {
+					if(p.getId()==id && listBox.getSelectedIndex()!=0) {
+						System.out.println(p);		
+						viewIdlb.setText("아이디:"+ p.getId());
+						viewNamelb.setText("이름:"+ p.getName());
+						viewHplb.setText("전화번호:"+ p.getHp());
+						viewEmaillb.setText("이메일:"+ p.getEmail());
+					}
+				}	
+				revalidate(); repaint();			
 			}
 		});
+		
+		//수정
+		updateNamelb2 = new Label("수정할 분의 성함");
+		updateNametf = new TextField(20);
+		updatebtn = new Button("찾기");
+		updateSearchListBox2 = new List();
+		
+		updateNamelb2.setVisible(false);
+		updateNametf.setVisible(false);
+		updatebtn.setVisible(false);
+		updateSearchListBox2.setVisible(false);
+		
+		add(updateNamelb2);
+		add(updateNametf);
+		add(updatebtn);
+		add(updateSearchListBox2);
+		
+		//수정 메뉴 클릭시
+		menuUpdatebtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible();
+				updateNamelb2.setVisible(true);
+				updateNametf.setVisible(true);
+				updatebtn.setVisible(true);
+				
+				revalidate(); repaint();
+			}
+		});
+		
+		
+		//찾기 버튼 클릭시
+		updatebtn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				setVisible();
+				updateNamelb2.setVisible(true);
+				updateNametf.setVisible(true);
+				updatebtn.setVisible(true);
+				updateSearchListBox2.setVisible(true);
+				
+				String search=updateNametf.getText();
+				Phonebook p=pm.selectByName(search);
+				if(p!=null) {
+					updateSearchListBox2.add(p.getId() + " " +p.getName());
+				}
+				revalidate(); repaint();
+			}
+		});
+		
+		
+		
+		
 	}
 	
 	
@@ -310,7 +390,15 @@ public class PhonebookFrame extends Frame{
 		updateNamelb.setVisible(false);
 		updateSearchNametf.setVisible(false);
 		updateSearchbtn.setVisible(false);
-		
 		updateSearchListBox.setVisible(false);
+		
+		updateNamelb2.setVisible(false);
+		updateNametf.setVisible(false);
+		updatebtn.setVisible(false);
+		updateSearchListBox2.setVisible(false);
+
+		
+		
 	}
+	
 }
