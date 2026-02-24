@@ -50,6 +50,14 @@ public class ByteLengthTest {
 		data4 = Arrays.copyOf(data3, 3);
 		System.out.println(Arrays.toString(data4));
 		System.out.println("data4 변수:" + data4.length);
+		
+		System.out.println("hello".length());
+		byte[] data5 ="hello".getBytes();
+		System.out.println(data5.length);
+		
+		System.out.println("안녕하세요".length());
+		byte[] data6 ="안녕하세요".getBytes();
+		System.out.println(data6.length);
 	}
 
 }

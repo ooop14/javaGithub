@@ -363,6 +363,12 @@ public class PhonebookFrame extends Frame{
 	
 	
 	
+	public PhonebookFrame(PhonebookManager pm) {
+		this.pm = pm;
+	}
+
+
+
 	public java.awt.List getListBox() {
 		return listBox;
 	}

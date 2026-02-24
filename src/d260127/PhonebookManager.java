@@ -9,12 +9,16 @@ import java.util.Iterator;
 import java.util.List;
 
 public class PhonebookManager {
-	private List<Phonebook> pb=new ArrayList<Phonebook>();
+	private List<Phonebook> pb;
 	
 	public PhonebookManager() {				
 		fileload("phonebook.txt");
 	}
 	
+	public PhonebookManager(List<Phonebook> pb) {
+		this.pb = pb;
+	}
+
 	public boolean filesave(String filename) {
 		try {
 		BufferedWriter bw
